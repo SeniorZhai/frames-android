@@ -21,28 +21,6 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        val githubEventLoggerPackageUrl =
-            project.findProperty("githubEventLoggerPackageUrl") as? String
-                ?: System.getenv("githubEventLoggerPackageUrl")
-        val githubPackagesUser = project.findProperty("githubPackagesUser") as? String
-            ?: System.getenv("githubPackagesUser")
-        val githubPackagesToken = project.findProperty("githubPackagesToken") as? String
-            ?: System.getenv("githubPackagesToken")
-        if (githubEventLoggerPackageUrl != null) {
-            maven {
-                name = "GitHubPackages"
-                url = uri(githubEventLoggerPackageUrl)
-                credentials {
-                    username = githubPackagesUser
-                    password = githubPackagesToken
-                }
-            }
-        }
-    }
-}
-
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
